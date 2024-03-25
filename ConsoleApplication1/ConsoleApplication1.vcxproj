@@ -128,11 +128,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="ConsoleApplication2.cpp" />
     <ClCompile Include="date.cpp" />
+    <ClCompile Include="PV_discrete.cpp" />
+    <ClCompile Include="TermStructure.cpp" />
+    <ClCompile Include="term_structure_class.cpp" />
+    <ClCompile Include="term_structure_class_flat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h" />
+    <ClInclude Include="fin_recipes.h" />
+    <ClInclude Include="PV_discrete.h" />
+    <ClInclude Include="TermStructure.h" />
+    <ClInclude Include="term_structure_class.h" />
+    <ClInclude Include="term_structure_class_flat.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
