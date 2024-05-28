@@ -79,19 +79,19 @@ void BondOptionPricingTree::calculate_parameters() {
     p_up = (exp(M * delta_t) - d) / (u - d); // Risk-neutral up probability
     p_down = 1.0 - p_up;                         // Risk-neutral down probability
  
-    R = exp(r * (bond_maturity / steps));        // Interest rate for each step
-    Rinv = 1.0 / R;                              // Inverse of interest rate
+    //R = exp(r * (bond_maturity / steps));        // Interest rate for each step
+    //Rinv = 1.0 / R;                              // Inverse of interest rate
 }
 
 double BondOptionPricingTree::bond_option_price_call_zero_american_rendleman_bartter() {
     calculate_parameters();
 
     //final vector of tree of interest rate
-    std::vector<double> r(steps + 1);
-    r[0] = R * pow(d, steps);
+    std::vector<double> rv(steps + 1);
+    rv[0] = r * pow(d, steps);
     double uu = u * u;
     for (int i = 1; i <= steps; ++i) {
-        r[i] = r[i - 1] * uu;
+        rv[i] = rv[i - 1] * uu;
     }
 
     //final vector of tree of bond
@@ -104,8 +104,8 @@ double BondOptionPricingTree::bond_option_price_call_zero_american_rendleman_bar
     int no_call_steps = int(steps * t / bond_maturity);
     for (int curr_step = steps; curr_step > no_call_steps; --curr_step) {
         for (int i = 0; i < curr_step; ++i) {
-            r[i] = r[i] * u;
-            P[i] = exp(-r[i] * delta_t) * (p_down * P[i] + p_up * P[i + 1]);
+            rv[i] = rv[i] * u;
+            P[i] = exp(-rv[i] * delta_t) * (p_down * P[i] + p_up * P[i + 1]);
         }
     }
 
@@ -117,34 +117,34 @@ double BondOptionPricingTree::bond_option_price_call_zero_american_rendleman_bar
     //update tree of option
     for (int curr_step = no_call_steps; curr_step > 0; --curr_step) {
         for (int i = 0; i < curr_step; i++) {
-            r[i] = r[i] * u;
-            P[i] = exp(-r[i] * delta_t) * (p_down * P[i] + p_up * P[i + 1]);
-            C[i] = std::max(P[i] - K, exp(-r[i] * delta_t) * (p_up * C[i + 1] + p_down * C[i]));
+            rv[i] = rv[i] * u;
+            P[i] = exp(-rv[i] * delta_t) * (p_down * P[i] + p_up * P[i + 1]);
+            C[i] = std::max(P[i] - K, exp(-rv[i] * delta_t) * (p_up * C[i + 1] + p_down * C[i]));
         }
     }
     return C[0];
 }
 
 
-
-#include <iostream>
-#include "OptionPricingTree.h"
-
-int main() {
-    double S = 0.15;    // Spot price
-    double K = 950;    // Exercise price
-    double M = 0.05;
-    double r = 0.1;     // Interest rate
-    double sigma = 0.2;  // Volatility
-    double t = 4.0;      // Time to maturity of option
-    double bond_maturity = 5;
-    double maturity_payment = 1000;
-    int steps = 1000;     // Number of steps in binomial tree
-
-    BondOptionPricingTree bondOption(S, K, r, sigma, t, steps, bond_maturity, M, maturity_payment);
-    double call_price = bondOption.bond_option_price_call_zero_american_rendleman_bartter();
-
-    std::cout << "European Call Option Price: " << call_price << std::endl;
-
-    return 0;
-}
+//
+//#include <iostream>
+//#include "OptionPricingTree.h"
+//
+//int main() {
+//    double S = 0.15;    // Spot price
+//    double K = 950;    // Exercise price
+//    double M = 0.05;
+//    double r = 0.1;     // Interest rate
+//    double sigma = 0.2;  // Volatility
+//    double t = 4.0;      // Time to maturity of option
+//    double bond_maturity = 5;
+//    double maturity_payment = 1000;
+//    int steps = 1000;     // Number of steps in binomial tree
+//
+//    BondOptionPricingTree bondOption(S, K, r, sigma, t, steps, bond_maturity, M, maturity_payment);
+//    double call_price = bondOption.bond_option_price_call_zero_american_rendleman_bartter();
+//
+//    std::cout << "European Call Option Price: " << call_price << std::endl;
+//
+//    return 0;
+//}

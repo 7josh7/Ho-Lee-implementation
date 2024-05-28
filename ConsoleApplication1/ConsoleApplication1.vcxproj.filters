@@ -21,7 +21,7 @@
     <ClCompile Include="date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="term_structure.cpp">
+    <ClCompile Include="TermStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DStat.cpp">
@@ -42,12 +42,21 @@
     <ClCompile Include="OptionPricingTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InterestRateTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TermStructureHoLee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeContingentCashFlows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="term_structure.h">
+    <ClInclude Include="TermStructure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DStat.h">
@@ -57,6 +66,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OptionPricingTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InterestRateTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TermStructureHoLee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeContingentCashFlows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

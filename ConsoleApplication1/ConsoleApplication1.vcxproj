@@ -142,16 +142,22 @@
     <ClCompile Include="date.cpp" />
     <ClCompile Include="DStat.cpp" />
     <ClCompile Include="DStat_example.cpp" />
+    <ClCompile Include="InterestRateTree.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OptionPricingTree.cpp" />
-    <ClCompile Include="term_structure.cpp" />
+    <ClCompile Include="TermStructure.cpp" />
+    <ClCompile Include="TermStructureHoLee.cpp" />
+    <ClCompile Include="TimeContingentCashFlows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackScholes.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="DStat.h" />
+    <ClInclude Include="InterestRateTree.h" />
     <ClInclude Include="OptionPricingTree.h" />
-    <ClInclude Include="term_structure.h" />
+    <ClInclude Include="TermStructure.h" />
+    <ClInclude Include="TermStructureHoLee.h" />
+    <ClInclude Include="TimeContingentCashFlows.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

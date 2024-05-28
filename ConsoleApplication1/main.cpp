@@ -11,7 +11,7 @@
 //#include <string>
 //#include "BlackScholes.h"
 //#include "date.h"
-//#include "term_structure.h"
+//#include "TermStructure.h"
 //
 //
 //
@@ -194,3 +194,55 @@
 //	// Start the event loop
 //	exec();
 //}
+
+
+
+#include "TimeContingentCashFlows.h"
+#include "TermStructureHoLee.h"
+#include "TermStructure.h"
+#include <iostream>
+#include <vector>
+
+int main() {
+    double delta = 0.98;
+    double pi = 0.5;
+    double r = 0.1;
+
+    // Flat term structure
+    TermStructure* initial = new TermStructureFlat(r);
+    std::vector<double> times;
+    times.push_back(5.0);
+    std::vector<double> cflows;
+    cflows.push_back(100);
+    double K = 80;
+    double time_to_maturity = 3;
+    std::cout << "Flat term structure" << std::endl;
+    std::cout << "c = " << price_european_call_option_on_bond_using_ho_lee(initial, delta, pi, times, cflows, K, time_to_maturity) << std::endl;
+    std::cout << std::endl;
+
+    delete initial;
+    // Nelson-Siegel term structure
+    double beta0 = 0.09;
+    double beta1 = 0.01;
+    double beta2 = 0.01;
+    double lambda = 5.0;
+    TermStructure::NelsonSiegelParams ns_params(beta0, beta1, beta2, lambda);
+    initial = new TermStructureInterpolated();
+
+    // Setting up the Nelson-Siegel term structure with interpolated observations
+    std::vector<double> ns_times = { 1.0, 2.0, 3.0, 4.0, 5.0 }; // Example times
+    std::vector<double> ns_yields;
+    for (double t : ns_times) {
+        ns_yields.push_back(TermStructure::nelsonSiegelSpotRate(t, ns_params));
+    }
+    dynamic_cast<TermStructureInterpolated*>(initial)->setInterpolatedObservations(ns_times, ns_yields);
+
+    std::cout << "Nelson Siegel term structure" << std::endl;
+    std::cout << "c = " << price_european_call_option_on_bond_using_ho_lee(initial, delta, pi, times, cflows, K, time_to_maturity) << std::endl;
+    std::cout << std::endl;
+
+    delete initial;
+
+    return 0;
+}
+
