@@ -38,7 +38,7 @@ double price_european_call_option_on_bond_using_ho_lee(TermStructure* initial,
                                                         const double& option_time_to_maturity) {
 
     int T = int(option_time_to_maturity + 0.0001);
-    auto hl_tree = buildTermStructureTree(initial, T + 1, delta, pi);
+    auto hl_tree = buildTermStructureTree(initial, T + 1, delta, pi); //might be the problem
     auto vec_cf = build_time_series_of_bond_time_contingent_cash_flows(underlying_bond_cflow_times, underlying_bond_cflows);
 
     for (size_t i = 0; i < hl_tree.size(); ++i) { // time i
@@ -59,16 +59,11 @@ double price_european_call_option_on_bond_using_ho_lee(TermStructure* initial,
     std::cout << "vec_cf.sizez():" << vec_cf.size() << std::endl;
     std::cout << "underlying_bond_cflows.sizez():" << underlying_bond_cflows.size() << std::endl;
 
-    // Ensure T + 1 is within bounds
-    if (T + 1 >= vec_cf.size()) {
-        std::cerr << "Error: T + 1 exceeds the size of vec_cf." << std::endl;
-        return -1;  // Return an error code or handle it appropriately
-    }
-
     std::vector<double> values(T + 1, 0.0);
     for (int i = 0; i <= T; ++i) {
-        values[i] = std::max(0.0, bonds_price(vec_cf[T + 1].times, vec_cf[T + 1].cash_flows, hl_tree[T][i]) - K);
+        values[i] = std::max(0.0, bonds_price(vec_cf[T].times, vec_cf[T].cash_flows, hl_tree[T][i]) - K); // Call payoffs at maturity
         std::cout << "check i :" << i << std::endl;
+        std::cout << "values[i] :" << values[i] << std::endl;
     }
 
     for (int t = T - 1; t >= 0; --t) {
