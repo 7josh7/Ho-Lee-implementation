@@ -67,7 +67,7 @@ double price_european_call_option_on_bond_using_ho_lee(TermStructure* initial,
 
     std::vector<double> values(T + 1, 0.0);
     for (int i = 0; i <= T; ++i) {
-        values[i] = std::max(0.0, bonds_price(vec_cf[T].times, vec_cf[T].cash_flows, hl_tree[T][i]) - K);
+        values[i] = std::max(0.0, bonds_price(vec_cf[T + 1].times, vec_cf[T + 1].cash_flows, hl_tree[T][i]) - K);
         std::cout << "check i :" << i << std::endl;
     }
 
