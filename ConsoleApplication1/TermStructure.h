@@ -64,6 +64,8 @@ public:
     virtual double d(const double& t) const override;
     virtual double f(const double& t1, const double& t2) const override;
     void setInterpolatedObservations(std::vector<double>& times, std::vector<double>& yields);
+    std::vector<double> getTimes() const; // Add this method
+    std::vector<double> getDiscountFactors() const; // Add this method
 };
 
 #endif // TERM_STRUCTURE_H

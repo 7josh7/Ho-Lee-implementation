@@ -153,9 +153,22 @@ void TermStructureInterpolated::clear() {
 }
 
 
+
+std::vector<double> TermStructureInterpolated::getTimes() const {
+    return times_;
+}
+
+std::vector<double> TermStructureInterpolated::getDiscountFactors() const {
+    std::vector<double> discount_factors;
+    for (const double& time : times_) {
+        discount_factors.push_back(d(time));
+    }
+    return discount_factors;
+}
+
 double bonds_price(const std::vector<double>& cashflow_times,
-                   const std::vector<double>& cashflows,
-                   const TermStructure& d) {
+    const std::vector<double>& cashflows,
+    const TermStructure& d) {
     double p = 0;
     for (int i = 0; i < cashflow_times.size(); i++) {
         p += d.d(cashflow_times[i]) * cashflows[i];
