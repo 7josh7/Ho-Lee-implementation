@@ -30,16 +30,27 @@ std::vector<TimeContingentCashFlows> build_time_series_of_bond_time_contingent_c
 }
 
 double price_european_call_option_on_bond_using_ho_lee(TermStructure* initial,
-                                                        const double& delta, 
-                                                        const double& pi, 
-                                                        const std::vector<double>& underlying_bond_cflow_times, 
-                                                        const std::vector<double>& underlying_bond_cflows,
-                                                        const double& K, 
-                                                        const double& option_time_to_maturity) {
+    const double& delta,
+    const double& pi,
+    const std::vector<double>& underlying_bond_cflow_times,
+    const std::vector<double>& underlying_bond_cflows,
+    const double& K,
+    const double& option_time_to_maturity,
+    const std::vector<double>& market_times,
+    const std::vector<double>& market_prices) {
 
     int T = int(option_time_to_maturity + 0.0001);
-    auto hl_tree = buildTermStructureTree(initial, T + 1, delta, pi); //might be the problem
+
+    // Calibrate the Ho-Lee model
+    TermStructureHoLee ho_lee_model(initial, T + 1, 0, delta, pi);
+    ho_lee_model.calibrate(market_times, market_prices);
+    double calibrated_delta = ho_lee_model.delta_;
+    double calibrated_pi = ho_lee_model.pi_;
+
+    // Build the term structure tree using calibrated parameters
+    auto hl_tree = buildTermStructureTree(initial, T + 1, calibrated_delta, calibrated_pi);
     auto vec_cf = build_time_series_of_bond_time_contingent_cash_flows(underlying_bond_cflow_times, underlying_bond_cflows);
+
 
     for (size_t i = 0; i < hl_tree.size(); ++i) { // time i
         const auto& row = hl_tree[i];

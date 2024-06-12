@@ -125,42 +125,42 @@ void TermStructureHoLee::calibrate(const std::vector<double>& market_times, cons
     delta_ = x[0];
     pi_ = x[1];
 }
-int main() {
-    // Market data: times (years) and corresponding zero-coupon bond prices
-    std::vector<double> market_times = { 1.0, 2.0, 3.0, 4.0, 6.0 };
-    std::vector<double> market_prices = { 0.95, 0.95, 0.85, 0.80, 0.7 };
-
-    // Initial parameters for the Ho-Lee model
-    int no_steps = 50;
-    double initial_delta = 0.98;
-    double initial_pi = 0.5;
-    double flat_rate = 0.15;
-
-    // Nelson-Siegel term structure
-    double beta0 = 0.12;
-    double beta1 = 0.5;
-    double beta2 = 0.001;
-    double lambda = 5.0;
-    TermStructure::NelsonSiegelParams ns_params(beta0, beta1, beta2, lambda);
-    TermStructure*  initial = new TermStructureInterpolated();
-
-    //Build the Ho-Lee model
-    TermStructureHoLee ho_lee_model(initial, no_steps, 0, initial_delta, initial_pi);
-
-    // Calibrate the Ho-Lee model to the market data
-    ho_lee_model.calibrate(market_times, market_prices);
-
-    // Print the calibrated parameters
-    std::cout << "Calibrated delta: " << ho_lee_model.delta_ << std::endl;
-    std::cout << "Calibrated pi: " << ho_lee_model.pi_ << std::endl;
-
-    // Print discount factors for different maturities using the calibrated model
-    for (size_t i = 0; i < market_times.size(); ++i) {
-        std::cout << "Discount factor for T = " << market_times[i] << " is " << ho_lee_model.d(market_times[i]) << std::endl;
-    }
-
-    return 0;
-}
+//int main() {
+//    // Market data: times (years) and corresponding zero-coupon bond prices
+//    std::vector<double> market_times = { 1.0, 2.0, 3.0, 4.0, 6.0 };
+//    std::vector<double> market_prices = { 0.95, 0.95, 0.85, 0.80, 0.7 };
+//
+//    // Initial parameters for the Ho-Lee model
+//    int no_steps = 50;
+//    double initial_delta = 0.98;
+//    double initial_pi = 0.5;
+//    double flat_rate = 0.15;
+//
+//    // Nelson-Siegel term structure
+//    double beta0 = 0.12;
+//    double beta1 = 0.5;
+//    double beta2 = 0.001;
+//    double lambda = 5.0;
+//    TermStructure::NelsonSiegelParams ns_params(beta0, beta1, beta2, lambda);
+//    TermStructure*  initial = new TermStructureInterpolated();
+//
+//    //Build the Ho-Lee model
+//    TermStructureHoLee ho_lee_model(initial, no_steps, 0, initial_delta, initial_pi);
+//
+//    // Calibrate the Ho-Lee model to the market data
+//    ho_lee_model.calibrate(market_times, market_prices);
+//
+//    // Print the calibrated parameters
+//    std::cout << "Calibrated delta: " << ho_lee_model.delta_ << std::endl;
+//    std::cout << "Calibrated pi: " << ho_lee_model.pi_ << std::endl;
+//
+//    // Print discount factors for different maturities using the calibrated model
+//    for (size_t i = 0; i < market_times.size(); ++i) {
+//        std::cout << "Discount factor for T = " << market_times[i] << " is " << ho_lee_model.d(market_times[i]) << std::endl;
+//    }
+//
+//    return 0;
+//}
 //example
 //#include "TermStructureHoLee.h"
 //#include "TermStructure.h"
