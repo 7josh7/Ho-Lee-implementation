@@ -117,6 +117,12 @@ bool date::is_leap_year(int year) const {
 	return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
+date date::current_date() {
+	time_t t = time(nullptr);
+	tm* now = localtime(&t);
+	return date(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900);
+}
+
 
 //operators overloading
 date date::operator++(int) {//postfixoperator

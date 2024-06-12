@@ -30,7 +30,6 @@ double TermStructureHoLee::d(const double& T) const {
     return d;
 }
 
-
 std::vector<std::vector<TermStructureHoLee>> buildTermStructureTree(TermStructure* initial, 
                                                                     const int& no_steps, 
                                                                     const double& delta, 

@@ -1,6 +1,9 @@
 //date.h
+#ifndef DATE_H
+#define DATE_H
 #include <algorithm>  // Include this for std::min
 #include <cmath>      // For floor and leap year calculations
+#include <ctime>
 
 enum class DayCountConvention {
     Thirty360,
@@ -29,6 +32,7 @@ public:
     bool is_leap_year(int) const;
     static date next_date(const date& d);
     static date previous_date(const date& d);
+    static date current_date();
     date operator ++(); //prefix
     date operator ++(int); //postfix
     date operator --(); //prefix
@@ -41,3 +45,4 @@ bool operator > (const date&, const date&);
 bool operator <= (const date&, const date&);
 bool operator >= (const date&, const date&);
 
+#endif // DATE_H
