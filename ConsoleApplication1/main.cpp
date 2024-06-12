@@ -21,23 +21,16 @@ int main() {
     int eYear = 2077, eMonth = 8, eDay = 8;//should be imputed by user
     date expirationDate(eDay, eMonth, eYear);
 
-    if (!startingDate.valid() || !expirationDate.valid()) {
-        //error message
-        return;
-    }
 
     // Determine the day count convention based on combox selection
     DayCountConvention dcc;
-    switch (true) {//should be imputed by dropdown list
+    switch (0) {//should be imputed by dropdown list
     case 0: dcc = DayCountConvention::Thirty360; break;
     case 1: dcc = DayCountConvention::Thirty365; break;
     case 2: dcc = DayCountConvention::Actual360; break;
     case 3: dcc = DayCountConvention::Actual365; break;
     case 4: dcc = DayCountConvention::ActualActual; break;
-    default:
-        //error message "Invalid day count convention selected");
-        return;
-    }
+	}
     // Calculate the time to maturity using years_until method
     double timeToMaturity = startingDate.years_until(expirationDate, dcc);
 
@@ -55,13 +48,12 @@ int main() {
     std::vector<double> cflows;
     cflows.push_back(100);
     double K = 80;
-    double time_to_maturity = 3;
-
     // Market data: times (years) and corresponding zero-coupon bond prices
     std::vector<double> market_times = { 1.0, 2.0, 3.0, 4.0, 5.0 };
     std::vector<double> market_prices = { 0.95, 0.90, 0.85, 0.80, 0.75 };
+    TermStructureInterpolated marketdata(market_times, market_prices);
     std::cout << "Flat term structure" << std::endl;
-    std::cout << "c = " << price_european_call_option_on_bond_using_ho_lee(initial, delta, pi, times, cflows, K, time_to_maturity, market_times, market_prices) << std::endl;
+    std::cout << "c = " << price_european_call_option_on_bond_using_ho_lee(initial, delta, pi, underlying_bond_cflow_times, underlying_bond_cflows, K, time_to_maturity, marketdata.getTimes(), marketdata.getDiscountFactors()) << std::endl;
     std::cout << std::endl;
 
     delete initial;

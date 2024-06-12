@@ -1,18 +1,8 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (ConsoleApplication1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  TermStructure.cpp
+  TermStructureHoLee.cpp
+C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\TermStructureHoLee.cpp(113,50): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  TimeContingentCashFlows.cpp
   main.cpp
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(26,9): error C2561: 'main': function must return a value
-  C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(9,5):
-  see declaration of 'main'
-  
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(39,9): error C2561: 'main': function must return a value
-  C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(9,5):
-  see declaration of 'main'
-  
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(58,12): error C2374: 'time_to_maturity': redefinition; multiple initialization
-  C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(46,50):
-  see declaration of 'time_to_maturity'
-  
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(34,5): warning C4808: case '2' is not a valid value for switch condition of type 'bool'
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(35,5): warning C4808: case '3' is not a valid value for switch condition of type 'bool'
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(36,5): warning C4808: case '4' is not a valid value for switch condition of type 'bool'
-C:\Users\Joshua\source\repos\ConsoleApplication1\ConsoleApplication1\main.cpp(40,5): warning C4809: switch statement has redundant 'default' label; all possible 'case' labels are given
+  Generating Code...
+  ConsoleApplication1.vcxproj -> C:\Users\Joshua\source\repos\ConsoleApplication1\x64\Debug\FA.exe
